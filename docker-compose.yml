@@ -1,0 +1,19 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    env_file:
+      - ./backend/.env  # Cargar el archivo .env para el backend
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "8080:8080"  # Mapear el puerto 8080
+    command: npm run dev
