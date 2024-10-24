@@ -48,19 +48,26 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18' # Cambiado a una versión compatible con los requerimientos
+        node-version: '18' # Versión de Node.js compatible con tu proyecto
   
     - name: Install frontend dependencies
       run: |
         cd frontend
         npm install
   
-    - name: Build frontend
+    - name: Build frontend (if in production mode)
       run: |
         cd frontend
-        npm run build
+        if [ "$CI" = "true" ]; then
+          npm run build
+        else
+          echo "Skipping build, still in development"
+        fi
   
-    - name: Sync with S3
+    - name: Deploy to S3 (if build exists)
       run: |
-        aws s3 sync frontend/build/ s3://anunc-ia-frontend --delete
-
+        if [ -d "frontend/build" ]; then
+          aws s3 sync frontend/build/ s3://anunc-ia-frontend --delete
+        else
+          echo "Build folder not found, skipping S3 sync"
+        fi
