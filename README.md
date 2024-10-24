@@ -26,7 +26,7 @@ Primero, clona este repositorio en tu máquina local:
 
 Copia el archivo de ejemplo para las variables de entorno y modifícalo con tus propios valores:
 
-    cp backend/.env
+    .env
 
 Modifica el archivo .env para configurar los valores necesarios, como las credenciales de base de datos y claves secretas.
 
@@ -73,7 +73,7 @@ Si deseas contribuir al proyecto, por favor sigue las siguientes indicaciones:
 
 1. Crea un fork del repositorio.
 2. Crea una nueva rama (git checkout -b feature-nueva-funcionalidad).
-3. Haz tus cambios y realiza los commits (git commit -m 'Añadir nueva funcionalidad').
+3. Haz tus cambios y realiza los commits (git commit -m 'Añadir nueva funcionalidad')
 4. Sube tu rama (git push origin feature-nueva-funcionalidad).
 5. Crea un Pull Request.
 

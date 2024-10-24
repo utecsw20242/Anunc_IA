@@ -1,0 +1,80 @@
+name: Deploy AnuncIA to AWS
+
+on:
+  push:
+    branches:
+      - main  # Ejecutar el despliegue cada vez que haya un push a la rama main
+
+jobs:
+  deploy_backend:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install backend dependencies
+      run: |
+        pip install -r backend/requirements.txt
+
+    - name: Zip backend code
+      run: zip -r backend.zip backend/ main.py requirements.txt
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2  # Cambia a tu región de AWS
+
+    - name: Deploy to AWS Lambda
+      run: |
+        aws lambda update-function-code \
+          --function-name anunc-ia-backend \
+          --zip-file fileb://backend.zip
+
+  deploy_frontend:
+    runs-on: ubuntu-latest
+  
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+  
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18' # Versión de Node.js compatible con tu proyecto
+  
+    - name: Install frontend dependencies
+      run: |
+        cd frontend
+        npm install
+  
+    # Aquí verificamos si estamos en desarrollo y mostramos un mensaje en lugar de fallar
+    - name: Skip deployment in development mode
+      run: |
+        if [ "$CI" = "true" ]; then
+          echo "Skipping build and deployment. Frontend is still in development mode."
+        else
+          echo "Development build, skipping deployment."
+        fi
+
+    - name: Build frontend (only for production)
+      if: ${{ github.event_name != 'push' }}  # Solo construye si NO estás en desarrollo
+      run: |
+        cd frontend
+        npm run build
+  
+    - name: Deploy to S3 (only if build exists)
+      if: ${{ github.event_name != 'push' }}  # Solo despliega si NO estás en desarrollo
+      run: |
+        if [ -d "frontend/build" ]; then
+          aws s3 sync frontend/build/ s3://anunc-ia-frontend --delete
+        else
+          echo "Build folder not found, skipping S3 sync"
+        fi
