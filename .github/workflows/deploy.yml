@@ -55,16 +55,23 @@ jobs:
         cd frontend
         npm install
   
-    - name: Build frontend (if in production mode)
+    # Aquí verificamos si estamos en desarrollo y mostramos un mensaje en lugar de fallar
+    - name: Skip deployment in development mode
+      run: |
+        if [ "$CI" = "true" ]; then
+          echo "Skipping build and deployment. Frontend is still in development mode."
+        else
+          echo "Development build, skipping deployment."
+        fi
+
+    - name: Build frontend (only for production)
+      if: ${{ github.event_name != 'push' }}  # Solo construye si NO estás en desarrollo
       run: |
         cd frontend
-        if [ "$CI" = "true" ]; then
-          npm run build
-        else
-          echo "Skipping build, still in development"
-        fi
+        npm run build
   
-    - name: Deploy to S3 (if build exists)
+    - name: Deploy to S3 (only if build exists)
+      if: ${{ github.event_name != 'push' }}  # Solo despliega si NO estás en desarrollo
       run: |
         if [ -d "frontend/build" ]; then
           aws s3 sync frontend/build/ s3://anunc-ia-frontend --delete
