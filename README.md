@@ -73,7 +73,7 @@ Si deseas contribuir al proyecto, por favor sigue las siguientes indicaciones:
 
 1. Crea un fork del repositorio.
 2. Crea una nueva rama (git checkout -b feature-nueva-funcionalidad).
-3. Haz tus cambios y realiza los commits (git commit -m 'Añadir nueva funcionalidad').
+3. Haz tus cambios y realiza los commits (git commit -m 'Añadir nueva funcionalidad')
 4. Sube tu rama (git push origin feature-nueva-funcionalidad).
 5. Crea un Pull Request.
 
