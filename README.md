@@ -26,7 +26,7 @@ Primero, clona este repositorio en tu máquina local:
 
 Copia el archivo de ejemplo para las variables de entorno y modifícalo con tus propios valores:
 
-    cp backend/.env
+    .env
 
 Modifica el archivo .env para configurar los valores necesarios, como las credenciales de base de datos y claves secretas.
 
