@@ -1,5 +1,16 @@
 version: '3'
 services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: peru4321$
+      POSTGRES_DB: postgres  # Cambié el nombre de la base de datos a 'postgres' como predeterminado
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data  # Persistencia de datos
+
   backend:
     build:
       context: ./backend
@@ -8,12 +19,17 @@ services:
     volumes:
       - ./backend:/app
     env_file:
-      - ./backend/.env  # Cargar el archivo .env para el backend
-    command: uvicorn main:app --host 0.0.0.0 --port 8000
+      - ./backend/.env
+    depends_on:
+      - db
+    command: /bin/sh -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000"
 
   frontend:
     build:
       context: ./frontend
     ports:
-      - "8080:8080"  # Mapear el puerto 8080
+      - "8080:8080"
     command: npm run dev
+
+volumes:
+  db_data:

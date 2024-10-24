@@ -14,5 +14,5 @@ COPY . .
 # Exponemos el puerto 8000 donde correrá FastAPI
 EXPOSE 8000
 
-# Comando para iniciar el servidor FastAPI
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Comando para ejecutar migraciones y luego iniciar el servidor FastAPI
+CMD ["sh", "-c", "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000"]

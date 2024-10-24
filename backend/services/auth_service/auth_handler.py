@@ -4,6 +4,7 @@ from common.database.database import get_db
 from .models import Usuario
 from .security import verify_password, get_password_hash, create_access_token
 from datetime import timedelta
+from .security import get_current_user
 
 router = APIRouter()
 
@@ -27,3 +28,7 @@ async def login_user(email: str, password: str, db: Session = Depends(get_db)):
     access_token_expires = timedelta(minutes=30)
     access_token = create_access_token(data={"sub": usuario.email}, expires_delta=access_token_expires)
     return {"access_token": access_token, "token_type": "bearer"}
+
+@router.get("/perfil")
+async def read_user_profile(current_user: Usuario = Depends(get_current_user)):
+    return {"nombre": current_user.nombre, "email": current_user.email}
