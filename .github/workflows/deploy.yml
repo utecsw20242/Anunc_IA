@@ -40,25 +40,27 @@ jobs:
 
   deploy_frontend:
     runs-on: ubuntu-latest
-
+  
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Install Node.js
+  
+    - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '16'  # Versión de Node.js que usas para tu frontend
-
+        node-version: '18' # Cambiado a una versión compatible con los requerimientos
+  
     - name: Install frontend dependencies
       run: |
         cd frontend
         npm install
-
+  
     - name: Build frontend
       run: |
+        cd frontend
         npm run build
-
+  
     - name: Sync with S3
       run: |
         aws s3 sync frontend/build/ s3://anunc-ia-frontend --delete
+
