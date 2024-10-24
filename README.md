@@ -19,8 +19,8 @@ Instrucciones de Despliegue Local
 
 Primero, clona este repositorio en tu máquina local:
 
-    git clone https://github.com/tu-usuario/tu-repositorio.git
-    cd tu-repositorio
+    git clone https://github.com/christophernajarro/Anunc_IA.git
+    cd Anunc_IA
 
 2. Configurar las variables de entorno
 
