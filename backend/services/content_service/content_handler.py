@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from common.middlewares.auth_middleware import get_current_user  # Middleware de autenticación
 
 # Cargar las variables de entorno desde el archivo .env en la carpeta config
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '../../config/.env'))
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '../../.env'))
 
 # Crear una instancia del cliente de OpenAI
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))

@@ -8,7 +8,7 @@ from common.database.database import get_db
 from services.auth_service.models import Usuario
 
 # Cargar las variables de entorno desde el archivo .env en la carpeta config
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '../../config/.env'))
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '../../.env'))
 
 # Obtener la clave secreta desde las variables de entorno
 SECRET_KEY = os.getenv("SECRET_KEY")

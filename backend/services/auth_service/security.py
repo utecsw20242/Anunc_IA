@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 
 
 # Este es el esquema de autenticación que esperará un token en el encabezado Authorization
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
 # Para el manejo de contraseñas seguras
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

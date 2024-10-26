@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from services.content_service.content_handler import router as content_router
 from services.auth_service.auth_handler import router as auth_router
 from dotenv import load_dotenv
@@ -6,10 +7,20 @@ import os
 from mangum import Mangum  # Importar Mangum para Lambda
 
 # Cargar las variables de entorno
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), 'config/.env'))
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '.env'))
 
 # Crear la instancia de FastAPI
 app = FastAPI()
+
+# Configuración de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Cambia esto a la URL de producción cuando despliegues
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 # Incluir el router del servicio de autenticación
 app.include_router(auth_router, prefix="/auth", tags=["auth"])
