@@ -19,7 +19,7 @@ function AdminDashboard() {
                                 Overview
                             </h2>
                             <p className="text-sm text-slate-500 dark:text-slate-200">
-                                Welcome back to Scribbler.AI
+                                Welcome back to AnuncIA
                             </p>
                         </div>
                         <div className="px-3">

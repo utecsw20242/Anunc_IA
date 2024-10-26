@@ -18,7 +18,7 @@ function SocialNetworksSettingsPage() {
                                     Tiktok
                                 </Label>
                                 <Input
-                                    defaultValue="scribbler.ai"
+                                    defaultValue="Anuncia"
                                     id="tiktokProfile"
                                     start="tiktok.com/@"
                                 />
@@ -33,7 +33,7 @@ function SocialNetworksSettingsPage() {
                                     Youtube
                                 </Label>
                                 <Input
-                                    defaultValue="scribbler.ai"
+                                    defaultValue="AnuncIA"
                                     id="youtubeProfile"
                                     start="youtube.com/"
                                 />

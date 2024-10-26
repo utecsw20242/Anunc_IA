@@ -1,21 +1,22 @@
 import React from "react";
 import { templates } from "../../../store";
 import { Link } from "react-router-dom";
+
 function TemplatesList() {
     return (
         <>
             <div className="mb-4 mt-8 flex justify-between items-center -mx-3">
                 <div className="px-3">
                     <h2 className="text-xl font-bold text-slate-700 dark:text-white mb-2">
-                        Our Awesome Tools
+                        Asistente de IA
                     </h2>
                 </div>
                 <div className="px-3">
                     <Link
-                        to="/app/templates"
+                        to="#"
                         className="font-medium text-sm text-blue-600 hover:text-blue-800"
                     >
-                        View All
+                        Ver Todos
                     </Link>
                 </div>
             </div>

@@ -15,16 +15,16 @@ const WelcomeCard = ({ name, wordsAvailable, imageCredit, badge }) => {
                     <div className=" absolute end-0 top-0"></div>
                     <div className="mb-auto">
                         <h6 className="font-bold text-xl w-max bg-gradient-to-r from-blue-300 to-pink-500 text-transparent bg-clip-text">
-                            Welcome
+                            Bienvenido
                         </h6>
                         <div className="font-bold text-sm text-white mt-2">
-                            Mr. {name}
+                            {name}
                         </div>
                     </div>
                     <div className="flex gap-x-6 mt-4">
                         <div>
                             <div className="text-xs text-slate-300 mt-1">
-                                Words Available
+                                Palabras disponibles
                             </div>
                             <div className="text-base font-bold text-slate-100 mt-1">
                                 {wordsAvailable}
@@ -32,7 +32,7 @@ const WelcomeCard = ({ name, wordsAvailable, imageCredit, badge }) => {
                         </div>
                         <div>
                             <div className="text-xs text-slate-300 mt-1">
-                                Image Credit
+                                Creditos de Imágenes
                             </div>
                             <div className="text-base font-bold text-slate-100 mt-1">
                                 {imageCredit}

@@ -1,471 +1,110 @@
 const data = [
-    {
-        id: "01",
-        name: "10 React Best practices",
-        template: "Article Generator",
-        size: "702",
-        type: "text",
-        created: "April 3th 2023, 06:32 PM",
-        content: `
-        <p>React is a popular JavaScript library used for building user interfaces, and following best practices can help you write cleaner, more maintainable, and performant code. Here are 10 React best practices to keep in mind:</p>
-        <ol>
-        <li><p><strong>Component Structure and Organization</strong>: Organize your components in a modular way, keeping them small and focused on specific tasks. Group related components into folders and use clear naming conventions.</p></li>
-        <li><p><strong>Use Functional Components</strong>: With the introduction of React hooks, functional components have become the preferred way to write components. They are more concise, easier to test, and promote the use of hooks.</p></li>
-        <li><p><strong>State Management</strong>: Use state management libraries like Redux or Mobx for handling complex state logic, shared state between components, and better predictability.</p></li>
-        <li><p><strong>Avoid Directly Manipulating the DOM</strong>: In React, avoid directly manipulating the DOM using native DOM APIs like <code>getElementById</code> or <code>innerHTML</code>. Instead, let React handle the rendering and use React's state and props to manage changes.</p></li>
-        <li><p><strong>Keys in Lists</strong>: When rendering lists in React, always provide a unique <code>key</code> prop to each item. This helps React efficiently update the UI when the list changes.</p></li>
-        <li><p><strong>Immutability</strong>: Avoid directly modifying state and props as it can lead to unintended side effects. Use immutable data structures or helper libraries (e.g., <code>Immutable.js</code>) to handle updates more predictably.</p></li>
-        <li><p><strong>Performance Optimization</strong>: Use tools like React's <code>memo</code> or <code>PureComponent</code> to prevent unnecessary re-renders, and leverage React's built-in <code>shouldComponentUpdate</code> or <code>React.memo</code> for functional components.</p></li>
-        <li><p><strong>Destructuring Props</strong>: Destructure props in functional components to make your code cleaner and easier to read, as well as to avoid unnecessary repetition.</p></li>
-        <li><p><strong>PropTypes or TypeScript</strong>: Type-checking is crucial for avoiding bugs and maintaining a healthy codebase. Use PropTypes or TypeScript to define the expected types of props and state.</p></li>
-        <li><p><strong>Error Boundaries</strong>: Use Error Boundaries to catch and handle errors within your components, preventing the entire application from crashing due to an error in a single component.</p></li>
-        </ol>
-        <p>Remember, best practices can change over time with new React features and updates, so always stay up-to-date with the latest recommendations from the React community and official documentation.</p>`
-    },
-    {
-        id: "02",
-        name: "Cowboy hourse riding on the moon",
-        template: "Article Generator",
-        size: "430",
-        type: "text",
-        created: "April 3th 2023, 06:32 PM",
-        content: `
-        <p>Once upon a time, in a world not so far away, there lived a cowboy named Hank. Hank wasn't your ordinary cowboy; he had always dreamt of adventures that took him beyond the dusty plains of Earth's Old West. He yearned for something more, something out of this world, quite literally.</p><br>
-        <p>Hank's dreams came true when a group of visionary scientists and engineers developed a way to explore the moon, establishing a small lunar base. This new era of space exploration was filled with endless possibilities, and Hank knew he had to be a part of it.</p><br>
-        <p>One sunny morning, as the spacecraft awaited liftoff at the Kennedy Space Center, Hank, dressed in his rugged cowboy attire, strode toward the launchpad. People stared, puzzled by the sight of a cowboy amidst the scientists and astronauts, but Hank paid them no mind. He was a cowboy with a purpose – a cowboy on a mission to ride the moon.</p><br>
-        <p>The spaceship, named "Starstrider," was sleek and advanced, equipped with all the technology needed for the lunar mission. Hank had undergone extensive training to prepare for the journey, and he was as ready as he could be.</p><br>
-        <p>As the countdown reached zero, the rocket engines roared to life, and Hank felt a rush of exhilaration like never before. With a thunderous roar, the Starstrider blasted off into the sky, leaving Earth behind.</p><br>
-        <p>Days turned into weeks as the spaceship hurtled through space, and Hank got accustomed to life in zero gravity. He marveled at the breathtaking views of the Earth and the moon as they grew closer and closer. Finally, the Starstrider touched down on the lunar surface, kicking up a cloud of lunar dust.</p><br>
-        <p>Hank climbed into his spacesuit, which resembled a futuristic cowboy outfit, complete with a helmet shaped like a Stetson hat. He descended the ladder and set foot on the moon, becoming the first cowboy to ever do so.</p><br>
-        <p>The lunar landscape was unlike anything Hank had ever seen. The desolate, cratered terrain stretched out before him, bathed in the eerie glow of Earth on the horizon. But Hank wasn't deterred. He had his trusty lunar rover, which he affectionately named "Rusty."</p><br>
-        <p>Hank hopped on Rusty and began his lunar adventure. Instead of herding cattle, he collected moon rocks and conducted experiments. He rode across the dusty plains, leaving tire tracks that would become his lunar trails.</p><br>
-        <p>Every evening, Hank would park Rusty and set up camp beneath the vast, star-filled lunar sky. He'd sip coffee from a pouch, gazing out at Earth, his lonesome cowboy's heart feeling strangely at peace.</p><br>
-        <p>One day, while exploring a particularly deep crater, Hank discovered something remarkable – a cave with mysterious symbols etched into its walls. It was a lunar treasure, an ancient artifact that could rewrite history books.</p><br>
-        <p>Hank's discovery made headlines around the world, and he became a hero on Earth, a legend in his own right. But he wasn't done with the moon yet. Hank continued to explore, dreaming of building a lunar ranch where he could ride beneath Earth's watchful eye.</p><br>
-        <p>As the years passed, more cowboys and pioneers joined Hank on the moon. The lunar base expanded, and the cowboy spirit thrived on this new frontier. Hank's dream had become a reality, and he was the original cowboy who had tamed the wild lunar frontier.</p><br>
-        <p>And so, in the great cosmic tapestry of space and time, there was a cowboy who had lassoed the moon, proving that dreams could come true even in the most unexpected of places. Hank, the cowboy on the moon, became a legend, forever etching his name into the history of the final frontier.</p>
-        `,
-    },
-    {
-        id: "03",
-        name: "Write a useEffect function with clean up",
-        template: "Code Generator",
-        size: "124",
-        type: "code",
-        created: "April 3th 2023, 06:32 PM",
-        content: `
-        <p>In React, the <strong>useEffect</strong> hook is used to perform side effects in functional components. It runs after every render and can be used to fetch data, subscribe to events, or perform other tasks that need to be done when the component mounts, updates, or unmounts. Sometimes, you might need to clean up resources or subscriptions to prevent memory leaks or unexpected behavior when the component is unmounted. You can achieve this by returning a cleanup function from the <strong>useEffect</strong> hook.</p>
-        <p>Here's an example of a <strong>useEffect</strong> function with cleanup:</p>
-        <br/>
-        <pre>
-        <code>
-import React, { useState, useEffect } from &#x27;react&#x27;;
-
-const MyComponent = () =&#x3E; {
-  const [data, setData] = useState(null);
-
-  useEffect(() =&#x3E; {
-    // This code will run when the component mounts or updates
-
-    // Simulate fetching data from an API (for demonstration purposes)
-    const fetchData = async () =&#x3E; {
-      try {
-        const response = await fetch(&#x27;https://api.example.com/data&#x27;);
-        const data = await response.json();
-        setData(data);
-      } catch (error) {
-        console.error(&#x27;Error fetching data:&#x27;, error);
-      }
-    };
-
-    fetchData();
-
-    // The cleanup function
-    return () =&#x3E; {
-      // This code will run when the component unmounts or updates and the effect is re-run
-
-      // Clean up any resources or subscriptions here
-      // For example, if you have an event listener, remove it to avoid memory leaks
-      // Remove any timers or intervals that were set up in the effect
-      // Clear any other resources that need cleanup
-
-      console.log(&#x27;Cleaning up...&#x27;);
-    };
-  }, []); // The empty dependency array ensures the effect runs only once (on mount) and not on updates
-
-  return (
-    &#x3C;div&#x3E;
-      {data ? (
-        &#x3C;ul&#x3E;
-          {data.map((item) =&#x3E; (
-            &#x3C;li key={item.id}&#x3E;{item.name}&#x3C;/li&#x3E;
-          ))}
-        &#x3C;/ul&#x3E;
-      ) : (
-        &#x3C;p&#x3E;Loading data...&#x3C;/p&#x3E;
-      )}
-    &#x3C;/div&#x3E;
-  );
-};
-
-export default MyComponent;
-        </code>
-        </pre>
-        <br/>
-        <p>In this example, the <strong>useEffect</strong> hook is used to fetch data from an API when the component mounts. The cleanup function is returned from the effect, which is executed when the component is unmounted or re-rendered and the effect is re-run.</p>
-        <p>The cleanup function is essential in scenarios where you need to clean up resources created within the <strong>useEffect</strong> to prevent memory leaks and unwanted behavior. In this case, the cleanup function is used to log a message, but in a real application, you would use it to remove event listeners, clear intervals, or perform other necessary cleanup tasks.</p>
-        `,
-    },
-    {
-        id: "04",
-        name: "How to Build a Single-Page Application with JavaScript and React",
-        template: "Article Generator",
-        size: "487",
-        type: "text",
-        created: "April 3th 2023, 06:32 PM",
-        content: `
-        <p>Building a Single-Page Application (SPA) with JavaScript and React involves several steps. Below, I'll outline the general process to create a basic SPA using React:</p>
-        <ol>
-        <li><strong>Setup</strong>: Make sure you have Node.js and npm (Node Package Manager) installed on your computer. Create a new project directory and initialize a new npm project using the following command in your terminal:</li>
-        </ol>
-        <pre><code>npm init</code></pre>
-        <ol start="2">
-        <li><strong>Install React and ReactDOM</strong>: Install React and ReactDOM packages using npm:</li>
-        </ol>
-        <pre>
-        <code>npm install react react-dom</code></pre>
-        <ol start="3">
-        <li><strong>Set up Babel and Webpack</strong>: To write modern JavaScript code and bundle your React application, you need Babel and Webpack. Install the required dependencies:</li>
-        </ol>
-        <pre><code>npm install @babel/core @babel/preset-env @babel/preset-react babel-loader webpack webpack-cli webpack-dev-server html-webpack-plugin --save-dev </code></pre>
-        <ol start="4">
-        <li><p><strong>Create a Webpack Configuration</strong>: Create a <code>webpack.config.js</code> file in the root of your project and configure Webpack with the necessary settings. This includes specifying entry points, output paths, loaders, and plugins.</p></li>
-        <li><p><strong>Create the React Components</strong>: Build your React components in the <code>src</code> folder. Create a root component that will be the entry point for your application.</p></li>
-        <li><p><strong>Define Routes</strong>: Decide on the routes you want to have in your SPA. You can use React Router for handling routing in your application. Install it using:</p></li>
-        </ol>
-        <pre><code>npm install react-router-dom </code></pre>
-        <ol start="7">
-        <li><p><strong>Create Navigation</strong>: Implement a navigation system using React Router. Define the different routes and the components that should be rendered for each route.</p></li>
-        <li><p><strong>Build the Application</strong>: Set up the necessary scripts in your <code>package.json</code> to build the application using Webpack and Babel.</p></li>
-        <li><p><strong>Run the Development Server</strong>: Configure a development server to serve your SPA during development. You can use <code>webpack-dev-server</code> to do this.</p></li>
-        <li><p><strong>Testing</strong>: Write unit tests for your components and run them using testing libraries like Jest and Enzyme.</p></li>
-        <li><p><strong>Deployment</strong>: Prepare your application for deployment by creating a production build. This usually involves running Webpack with optimizations for production.</p></li>
-        <li><p><strong>Deploy the Application</strong>: Host your built application on a web server or deploy it using platforms like Netlify, Vercel, or GitHub Pages.</p></li>
-        </ol>
-        <p>Here's a simplified folder structure for your project:</p>
-        <pre><code class="!whitespace-pre hljs language-css">your-app/
-        |- node_modules/
-        |- <span class="hljs-attribute">src</span>/
-        |  |- components/
-        |  |  |- <span>Header</span><span>.js</span>
-        |  |  |- Home<span>.js</span>
-        |  |  |- About<span>.js</span>
-        |  |- App<span>.js</span>
-        |  |- index<span>.js</span>
-        |- package<span>.json</span>
-        |- webpack<span>.config</span><span>.js</span>
-        |- <span>.babelrc</span>
-        |- index<span>.html</span></code></pre>
-        <p>Remember, this is just an overview, and each step can be quite involved. As you progress through building your SPA, refer to the official documentation of React, React Router, Webpack, and Babel to understand the finer details and best practices. Also, consider using additional libraries and tools like Redux for state management if your application becomes more complex.</p>
-        `,
-    },
-    {
-        id: "05",
-        name: "10 Tips for Debugging JavaScript Code Like a Pro",
-        template: "Article Generator",
-        size: "356",
-        type: "text",
-        created: "April 3th 2023, 06:32 PM",
-        content: `<p>Debugging is an essential skill for any JavaScript developer. Here are ten tips to help you debug JavaScript code like a pro:</p>
-        <ol>
-        <li><p><strong>Use Browser Developer Tools</strong>: Most modern browsers come with robust developer tools. Use the Console, Debugger, and Network tabs to inspect variables, set breakpoints, and analyze network activity.</p></li>
-        <li><p><strong>Set Breakpoints</strong>: Place <code>debugger;</code> statements directly in your code to halt execution and inspect the state of your application at specific points.</p></li>
-        <li><p><strong>Inspect Console Output</strong>: Use <code>console.log()</code> to print values and debug messages. You can also use <code>console.error()</code>, <code>console.warn()</code>, and <code>console.info()</code> to highlight different types of output.</p></li>
-        <li><p><strong>Watch Expressions</strong>: While debugging, set up watch expressions in your debugger to monitor the values of specific variables as you step through your code.</p></li>
-        <li><p><strong>Inspect Call Stack</strong>: When an error occurs, examine the call stack to understand the sequence of function calls that led to the error.</p></li>
-        <li><p><strong>Check for Typos and Syntax Errors</strong>: Carefully review your code for typos and syntax errors that may cause unexpected behavior or prevent your code from running altogether.</p></li>
-        <li><p><strong>Use ESLint and Linters</strong>: Use ESLint and other linters to catch potential issues early and enforce code quality and consistency.</p></li>
-        <li><p><strong>Isolate the Problem</strong>: Temporarily remove unrelated code or comment out sections to narrow down the problem to a specific area of your codebase.</p></li>
-        <li><p><strong>Version Control and Git</strong>: Utilize version control (e.g., Git) to create branches or commits when attempting significant changes. This way, you can easily revert to a working state if something goes wrong.</p></li>
-        <li><p><strong>Write Unit Tests</strong>: Create unit tests for your functions and components using testing frameworks like Jest. These tests can help you quickly identify issues as you make changes.</p></li>
-        </ol>
-        <p>Bonus Tip: If you encounter a particularly challenging issue, don't hesitate to search for help online. Many developers share their experiences and solutions on platforms like Stack Overflow and GitHub.</p>
-        <p>Remember, debugging is a skill that improves with practice. Be patient and methodical in your approach, and always strive to write clean and well-structured code to make the debugging process smoother. Happy debugging!</p>
-        `,
-    },
-    {
-        id: "06",
-        name: "Display a Random Quote on Your Webpage with JavaScript",
-        template: "Code Generator",
-        size: "212",
-        type: "text",
-        created: "April 3th 2023, 06:32 PM",
-        content: `
-        <p>To display a random quote on a webpage using JavaScript, you can follow these steps:</p>
-        <br>
-        <ol>
-          <li>Create an HTML file to structure your webpage.</li>
-          <li>Define an array of quotes in JavaScript.</li>
-          <li>Write JavaScript code to select a random quote from the array and display it on the webpage.</li>
-          <li>Style the webpage with CSS (optional).</li>
-        </ol>
-        <br>
-        <p>Here's a step-by-step example:</p>
-        <br>
-        <ol><li>Create an HTML file (e.g., <code>index.html</code>):</li></ol>
-        <br>
-        <pre><code>
-&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;Random Quote Generator&lt;/title&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class=&quot;container&quot;&gt;
-        &lt;h1&gt;Random Quote Generator&lt;/h1&gt;
-        &lt;div class=&quot;quote&quot;&gt;
-            &lt;p id=&quot;quote-text&quot;&gt;Loading...&lt;/p&gt;
-            &lt;button id=&quot;new-quote-button&quot;&gt;New Quote&lt;/button&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<br>
-        <ol start="2"><li>Create a JavaScript file (e.g., <code>script.js</code>) to handle the random quote generation:</li></ol>
-        <br>
-        <pre><code>
-// Define an array of quotes
-const quotes = [
-    "The only way to do great work is to love what you do. - Steve Jobs",
-    "Innovation distinguishes between a leader and a follower. - Steve Jobs",
-    "Your time is limited, don't waste it living someone else's life. - Steve Jobs",
-    "The greatest glory in living lies not in never falling, but in rising every time we fall. - Nelson Mandela",
-    "The only impossible journey is the one you never begin. - Tony Robbins",
-    "Success is not final, failure is not fatal: It is the courage to continue that counts. - Winston Churchill",
-    "The only thing standing between you and your goal is the story you keep telling yourself as to why you can't achieve it. - Jordan Belfort"
-];
-
-// Function to generate a random quote
-function getRandomQuote() {
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    return quotes[randomIndex];
-}
-
-// Function to display a random quote
-function displayRandomQuote() {
-    const quoteText = document.getElementById("quote-text");
-    quoteText.textContent = getRandomQuote();
-}
-
-// Event listener for the "New Quote" button
-const newQuoteButton = document.getElementById("new-quote-button");
-newQuoteButton.addEventListener("click", displayRandomQuote);
-
-// Initial quote display
-displayRandomQuote();</code></pre>
-<br>
-        <ol start="3"><li>Optionally, create a CSS file (e.g., <code>styles.css</code>) to style your webpage:</li></ol>
-<br>
-<pre><code>
-<br>
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.container {
-  text-align: center;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.quote {
-  margin-top: 20px;
-}
-
-#quote-text {
-  font-size: 18px;
-}
-
-#new-quote-button {
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-#new-quote-button:hover {
-  background-color: #0056b3;
-}</code></pre>
-      <br>
-      <ol start="4"><li>Open the <code>index.html</code> file in a web browser, and you should see a webpage that displays a random quote. Clicking the "New Quote" button will generate and display a new random quote.</li></ol>
-      <br>
-      <p>This example demonstrates how to create a simple random quote generator using HTML, JavaScript, and CSS. You can customize it further by adding more quotes or adjusting the styling to fit your preferences.</p>
-        `,
-    },
-    {
-        id: "07",
-        name: "Create a Simple JavaScript Calculator with Basic Math Operations",
-        template: "Code Generator",
-        size: "652",
-        type: "text",
-        created: "April 3th 2023, 06:32 PM",
-        content: `
-        <p>To create a simple JavaScript calculator with basic math operations (addition, subtraction, multiplication, and division), you can follow these steps:</p>
-        <br>
-        <ol><li>Create an HTML file to structure your calculator.</li><li>Write JavaScript code to handle the calculations.</li><li>Create CSS for styling (optional).</li></ol>
-        <br>
-        <p>Here's a step-by-step example:</p>
-        <br>
-        <ol><li>Create an HTML file (e.g., <code>calculator.html</code>):</li></ol>
-        <br>
-<pre><code>
-&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;Simple Calculator&lt;/title&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class=&quot;calculator&quot;&gt;
-        &lt;input type=&quot;text&quot; id=&quot;display&quot; readonly&gt;
-        &lt;div class=&quot;buttons&quot;&gt;
-            &lt;button onclick=&quot;clearDisplay()&quot;&gt;C&lt;/button&gt;
-            &lt;button onclick=&quot;appendToDisplay(&apos;7&apos;)&quot;&gt;7&lt;/button&gt;
-            &lt;button onclick=&quot;appendToDisplay(&apos;8&apos;)&quot;&gt;8&lt;/button&gt;
-            &lt;button onclick=&quot;appendToDisplay(&apos;9&apos;)&quot;&gt;9&lt;/button&gt;
-            &lt;button onclick=&quot;appendToDisplay(&apos;+&apos;)&quot;&gt;+&lt;/button&gt;
-            &lt;button onclick=&quot;appendToDisplay(&apos;4&apos;)&quot;&gt;4&lt;/button&gt;
-            &lt;button onclick=&quot;appendToDisplay(&apos;5&apos;)&quot;&gt;5&lt;/button&gt;
-            &lt;button onclick=&quot;appendToDisplay(&apos;6&apos;)&quot;&gt;6&lt;/button&gt;
-            &lt;button onclick=&quot;appendToDisplay(&apos;-&apos;)&quot;&gt;-&lt;/button&gt;
-            &lt;button onclick=&quot;appendToDisplay(&apos;1&apos;)&quot;&gt;1&lt;/button&gt;
-            &lt;button onclick=&quot;appendToDisplay(&apos;2&apos;)&quot;&gt;2&lt;/button&gt;
-            &lt;button onclick=&quot;appendToDisplay(&apos;3&apos;)&quot;&gt;3&lt;/button&gt;
-            &lt;button onclick=&quot;appendToDisplay(&apos;*&apos;)&quot;&gt;*&lt;/button&gt;
-            &lt;button onclick=&quot;appendToDisplay(&apos;0&apos;)&quot;&gt;0&lt;/button&gt;
-            &lt;button onclick=&quot;calculateResult()&quot;&gt;=&lt;/button&gt;
-            &lt;button onclick=&quot;appendToDisplay(&apos;/&apos;)&quot;&gt;/&lt;/button&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<br>
-<ol start="2"><li>Create a JavaScript file (e.g., <code>script.js</code>) to handle the calculator logic:</li></ol>
-<br>
-<pre><code>
-let displayValue = '';
-
-function appendToDisplay(value) {
-    displayValue += value;
-    updateDisplay();
-}
-
-function clearDisplay() {
-    displayValue = '';
-    updateDisplay();
-}
-
-function calculateResult() {
-    try {
-        const result = eval(displayValue);
-        if (!isNaN(result)) {
-            displayValue = result.toString();
-            updateDisplay();
-        } else {
-            displayValue = '';
-            updateDisplay();
-            alert('Invalid input');
-        }
-    } catch (error) {
-        displayValue = '';
-        updateDisplay();
-        alert('An error occurred');
-    }
-}
-
-function updateDisplay() {
-    const display = document.getElementById('display');
-    display.value = displayValue;
-}</code></pre>
-<br>
-<ol start="3"><li>Optionally, create a CSS file (e.g., <code>styles.css</code>) to style your calculator:</li></ol>
-<br>
-<pre><code>
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.calculator {
-  text-align: center;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-#display {
-  width: 100%;
-  padding: 10px;
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #0056b3;
-}</code></pre>
-<br>
-<ol start="4"><li>Open the <code>calculator.html</code> file in a web browser, and you should see a simple calculator with basic math operations. You can enter expressions and perform calculations by clicking the buttons.</li></ol>
-<br>
-<p>This example demonstrates how to create a basic calculator using HTML, JavaScript, and CSS. It supports addition, subtraction, multiplication, and division. You can further enhance it by adding more features and error handling as needed.</p>
-        `,
-    },
+  {
+      id: "01",
+      name: "Impacto de la Campaña de Primavera",
+      template: "Document",  // Icono existente
+      size: "1050",
+      type: "text",
+      created: "10 de Octubre, 2024, 03:45 PM",
+      content: `
+      <p>Esta campaña de anuncios de primavera se enfocó en aumentar el alcance de productos de moda y estilo de vida a través de plataformas como Facebook e Instagram. A continuación se detallan las métricas y conclusiones más relevantes:</p>
+      <ul>
+      <li><p><strong>Impresiones Totales</strong>: La campaña alcanzó 3.5 millones de impresiones, generando un amplio reconocimiento de marca en el público objetivo de entre 18-35 años.</p></li>
+      <li><p><strong>Tasa de Conversión</strong>: Con una tasa de conversión del 2.8%, la campaña logró una cifra significativa de ventas directas desde el anuncio.</p></li>
+      <li><p><strong>Costo por Clic (CPC)</strong>: El CPC promedio fue de $0.75, dentro del presupuesto establecido para maximizar la efectividad en redes sociales.</p></li>
+      <li><p><strong>Engagement</strong>: La campaña obtuvo un engagement de 15%, con comentarios y compartidos en aumento durante la primera semana.</p></li>
+      <li><p><strong>ROI</strong>: Con un retorno sobre la inversión del 240%, la campaña cumplió y superó los objetivos planteados para este periodo.</p></li>
+      </ul>
+      <p>Recomendación: Enfocar próximas campañas en audiencias similares y ajustar el horario de publicación para captar más atención en momentos clave.</p>`
+  },
+  {
+      id: "02",
+      name: "Estrategia de Anuncios para Black Friday",
+      template: "Document",  // Icono existente
+      size: "790",
+      type: "text",
+      created: "15 de Octubre, 2024, 01:30 PM",
+      content: `
+      <p>La campaña de Black Friday busca optimizar la conversión de productos electrónicos y accesorios tecnológicos. Las métricas iniciales son:</p>
+      <ul>
+      <li><p><strong>Impresiones Estimadas</strong>: 5 millones, con una segmentación geográfica en áreas urbanas de alto tráfico como Lima y Arequipa.</p></li>
+      <li><p><strong>Tasa de Clics (CTR)</strong>: Meta de 3.2% para atraer un flujo de clientes interesados en productos tecnológicos específicos.</p></li>
+      <li><p><strong>Presupuesto Diario</strong>: $500, enfocado en aumentar el tráfico hacia la tienda online y maximizar conversiones.</p></li>
+      <li><p><strong>Engagement Esperado</strong>: 20%, con contenido optimizado para incentivar comentarios y recomendaciones.</p></li>
+      </ul>
+      <p>Objetivo: Alcanzar un ROI del 300% y mantener un CPC promedio de $0.65.</p>`
+  },
+  {
+      id: "03",
+      name: "Guía para Crear Campañas Efectivas en TikTok",
+      template: "Document",  // Icono existente
+      size: "512",
+      type: "text",
+      created: "20 de Octubre, 2024, 11:15 AM",
+      content: `
+      <p>Esta guía cubre los pasos esenciales para diseñar y optimizar campañas en TikTok para maximizar el alcance y engagement.</p>
+      <ol>
+      <li><strong>Definir Objetivo</strong>: Establece un objetivo claro (reconocimiento de marca, conversión, etc.) que sea alcanzable y medible.</li>
+      <li><strong>Segmentación de Audiencia</strong>: Selecciona un público objetivo de acuerdo a intereses, ubicación y comportamiento.</li>
+      <li><strong>Contenido Visual</strong>: Crea videos de alta calidad que capturen la atención en los primeros segundos.</li>
+      <li><strong>Uso de Hashtags</strong>: Investiga hashtags populares y relevantes para ampliar el alcance.</li>
+      <li><strong>Monitoreo de Métricas</strong>: Sigue de cerca el CPC, CTR y ROI durante el transcurso de la campaña.</li>
+      </ol>
+      <p>Ejemplo de métricas objetivo: CPC máximo de $0.80, CTR de 5% y ROI de 250% para anuncios de moda.</p>`
+  },
+  {
+      id: "04",
+      name: "Campaña de Lanzamiento para Nueva Colección",
+      template: "Document",  // Icono existente
+      size: "674",
+      type: "text",
+      created: "21 de Octubre, 2024, 04:00 PM",
+      content: `
+      <p>La campaña de lanzamiento para la nueva colección de ropa se diseñó para captar la atención de usuarios jóvenes en redes sociales.</p>
+      <ul>
+      <li><p><strong>Alcance Total</strong>: 2 millones de usuarios en las primeras 48 horas.</p></li>
+      <li><p><strong>Tasa de Interacción</strong>: 18%, con un alto nivel de comentarios y compartidos en el segmento de 20-30 años.</p></li>
+      <li><p><strong>Ingresos Generados</strong>: $45,000, superando las expectativas iniciales.</p></li>
+      <li><p><strong>Tasa de Conversión</strong>: 3.1%, superior al promedio en la industria de moda.</p></li>
+      </ul>
+      <p>Conclusión: La campaña fue exitosa, se recomienda realizar una campaña de retargeting para maximizar el impacto en clientes interesados.</p>`
+  },
+  {
+      id: "05",
+      name: "Tips para Crear Anuncios con Alta Conversión en Instagram",
+      template: "Document",  // Icono existente
+      size: "356",
+      type: "text",
+      created: "23 de Octubre, 2024, 09:20 AM",
+      content: `
+      <p>Los anuncios de Instagram ofrecen una excelente oportunidad para conectar con el público. Aquí tienes 5 tips para aumentar las conversiones:</p>
+      <ul>
+      <li><p><strong>Uso de Imágenes y Videos de Calidad</strong>: Utiliza contenido visual atractivo que capte la atención en el primer segundo.</p></li>
+      <li><p><strong>Llamadas a la Acción Claras</strong>: Invita a los usuarios a actuar con CTAs visibles y concisos como "Compra Ahora" o "Descubre Más".</p></li>
+      <li><p><strong>Segmentación Detallada</strong>: Aprovecha la segmentación de Instagram para llegar a tu audiencia ideal según edad, ubicación e intereses.</p></li>
+      <li><p><strong>Pruebas A/B</strong>: Realiza experimentos con diferentes versiones de anuncios para identificar qué contenido resuena mejor con tu audiencia.</p></li>
+      <li><p><strong>Fomentar el Engagement</strong>: Usa encuestas, cuestionarios y contenido interactivo para aumentar la participación y retención de la audiencia.</p></li>
+      </ul>
+      <p>Aplicando estas estrategias puedes lograr un CTR más alto y una mayor conversión en cada campaña de Instagram.</p>`
+  },
+  {
+      id: "06",
+      name: "Análisis de Rentabilidad: Campaña de Verano",
+      template: "Document",  // Icono existente
+      size: "450",
+      type: "text",
+      created: "24 de Octubre, 2024, 02:30 PM",
+      content: `
+      <p>El análisis de la campaña de verano reveló métricas clave para evaluar la rentabilidad y el alcance del público:</p>
+      <ul>
+      <li><p><strong>Impresiones Totales</strong>: 4 millones de impresiones generadas en plataformas clave (Facebook, TikTok, Google).</p></li>
+      <li><p><strong>Engagement</strong>: 12% en promedio, con un aumento de interacción en anuncios en formato de video.</p></li>
+      <li><p><strong>Coste de Adquisición por Cliente (CAC)</strong>: $9.75, dentro del rango esperado para campañas de productos de temporada.</p></li>
+      <li><p><strong>Ingresos Totales</strong>: $65,000, con un margen de beneficio del 18% respecto al presupuesto.</p></li>
+      <li><p><strong>Tiempo Medio de Visita</strong>: 45 segundos en promedio por usuario en la landing page.</p></li>
+      </ul>
+      <p>Recomendación: Incrementar el uso de videos en redes sociales y optimizar las palabras clave de búsqueda para atraer aún más tráfico durante la próxima temporada.</p>`
+  },
 ];
 
 export default data;

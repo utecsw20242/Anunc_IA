@@ -41,7 +41,7 @@ function GeneralSettingsPage() {
                                     Site Name
                                 </Label>
                                 <Input
-                                    defaultValue="Scribbler.AI"
+                                    defaultValue="AnuncIA"
                                     id="siteName"
                                 />
                             </div>
@@ -63,7 +63,7 @@ function GeneralSettingsPage() {
                                     Site Email
                                 </Label>
                                 <Input
-                                    defaultValue="contact@scribbler.ai"
+                                    defaultValue="contact@anuncia.pe"
                                     id="siteEmail"
                                 />
                             </div>
@@ -74,7 +74,7 @@ function GeneralSettingsPage() {
                                     Site URL
                                 </Label>
                                 <Input
-                                    defaultValue="scribbler.ai"
+                                    defaultValue="anuncia.pe"
                                     id="siteURL"
                                 />
                             </div>

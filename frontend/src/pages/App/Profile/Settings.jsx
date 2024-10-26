@@ -63,7 +63,7 @@ function Settings() {
                                 </a>
                             </Label>
                             <Input
-                                defaultValue="phillip@scribbler.ai"
+                                defaultValue="phillip@anuncia.pe"
                                 id="useremail"
                                 disabled
                             />

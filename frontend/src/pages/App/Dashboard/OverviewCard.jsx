@@ -22,7 +22,7 @@ const OverviewCard = ({ icon: Icon, value, description, link, linkText, badge })
                                 {value}
                             </span>
                             <span className="text-sm font-semibold leading-6 tracking-wide text-slate-500 dark:text-slate-400">
-                                This Month
+                                Este Mes
                             </span>
                         </p>
                         <h6 className="text-md font-bold text-slate-700 dark:text-white mb-1">

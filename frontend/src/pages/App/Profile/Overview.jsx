@@ -55,7 +55,7 @@ function Overview({ setSelectedIndex }) {
                                     Email
                                 </h6>
                                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                                    phillip@scribbler.ai
+                                    phillip@anuncia.pe
                                 </p>
                             </div>
                         </div>

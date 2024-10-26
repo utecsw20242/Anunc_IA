@@ -2,18 +2,20 @@ import React from "react";
 import Layout from "../../../layout/dashboard";
 import Section from "../../../layout/global/Section";
 import Container from "../../../layout/global/Container";
-import { ColorPalette, Document, Message } from "../../../components/icons";
+import { Document, ColorPalette, Message } from "../../../components/icons"; 
+import { Button } from "../../../components";
 import RecentDocument from "./RecentDocument";
 import OverviewCard from "./OverviewCard";
 import WelcomeCard from "./WelcomeCard";  
-import InfoTiles
- from "./InfoTiles";  
+import InfoTiles from "./InfoTiles";  
+import TemplatesList from "./TemplatesList";
 
 function Home() {
     return (
-        <Layout title="User Dashboard">
+        <Layout title="Dashboard">
             <Section className="py-10 px-3">
                 <Container>
+                    {/* Encabezado de la sección de Overview */}
                     <div className="mb-7 flex justify-between items-center -mx-3">
                         <div className="px-3">
                             <h2 className="text-xl font-bold text-slate-700 dark:text-white mb-2">
@@ -23,86 +25,93 @@ function Home() {
                         <div className="px-3">
                             <Button
                                 as="Link"
-                                to="/#"
+                                to="/create-new-campaign"
                                 className="bg-blue-600 text-white hover:bg-blue-800"
                             >
-                                Create New
+                                Crear Nueva Campaña
                             </Button>
                         </div>
                     </div>
+                    
                     <div className="flex flex-wrap -m-3">
+                        {/* Tarjeta de bienvenida al usuario */}
                         <WelcomeCard
-                            name="Phillip Burke"
+                            name="Usuario"
                             wordsAvailable="48,610"
-                            imageCredit="1987"
+                            imageCredit="3500"
                             badge="Premium"
                         />
-                        <OverviewCard
-                            icon={Document}
-                            value="132"
-                            description="Document Created"
-                            link="/#"
-                            linkText="Create Document"
-                        />
+
                         <OverviewCard
                             icon={ColorPalette}
-                            value="28"
-                            description="Image Created"
-                            link="/#"
-                            linkText="Create Image"
+                            value="152"
+                            description="Documentos Generados"
+                            link="/documents"
+                            linkText="Ver Documentos"
                         />
                         <OverviewCard
                             icon={Message}
-                            value="289"
-                            description="Chat Session"
-                            link="/#"
-                            linkText="Chat Now"
-                            badge="Premium"
+                            value="872"
+                            description="Anuncios Publicados"
+                            link="/ads"
+                            linkText="Ver Anuncios"
                         />
+                        <OverviewCard
+                            icon={ColorPalette}
+                            value="$8,245"
+                            description="Gastos Publicitarios"
+                            link="/spending-details"
+                            linkText="Ver Gastos"
+                        />
+
+                        {/* Información mensual y anual sobre el rendimiento de campañas */}
                         <div className="w-full xs:w-1/2 lg:w-1/4 p-3">
                             <InfoTiles
-                                title="New Users"
-                                accent
+                                title="Rendimiento Anuncios"
                                 data={{
-                                    thisMonth: "487",
-                                    lastMonth: "225",
-                                    thisYear: "187500",
+                                    thisMonth: "4.2%",
+                                    lastMonth: "3.8%",
+                                    thisYear: "4.0%",
                                 }}
                             />
                         </div>
                         <div className="w-full xs:w-1/2 lg:w-1/4 p-3">
                             <InfoTiles
-                                title="New Subscribers"
+                                title="Conversiones"
                                 data={{
-                                    thisMonth: "78",
-                                    lastMonth: "124",
-                                    thisYear: "759",
+                                    thisMonth: "642",
+                                    lastMonth: "548",
+                                    thisYear: "7,843",
                                 }}
                             />
                         </div>
                         <div className="w-full xs:w-1/2 lg:w-1/4 p-3">
                             <InfoTiles
-                                title="Total Income"
+                                title="Ingresos del Mes"
                                 data={{
-                                    thisMonth: "$17855",
-                                    lastMonth: "$822",
-                                    thisYear: "$87042",
+                                    thisMonth: "$17,855",
+                                    lastMonth: "$8,220",
+                                    thisYear: "$87,042",
                                 }}
                             />
                         </div>
                         <div className="w-full xs:w-1/2 lg:w-1/4 p-3">
                             <InfoTiles
-                                title="Total Spending"
+                                title="Gastos del Mes"
                                 data={{
-                                    thisMonth: "$856",
-                                    lastMonth: "$227",
-                                    thisYear: "$11510",
+                                    thisMonth: "$2,156",
+                                    lastMonth: "$1,227",
+                                    thisYear: "$11,510",
                                 }}
                             />
                         </div>
+
+                        {/* Documentos Recientes y Plantillas */}
                         <div className="w-full p-3">
                             <RecentDocument />
                         </div>
+                        
+                        <TemplatesList />
                     </div>
                 </Container>
             </Section>

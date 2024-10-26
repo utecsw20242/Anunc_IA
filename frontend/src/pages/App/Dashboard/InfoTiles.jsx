@@ -43,7 +43,7 @@ function InfoTiles({ title, data, accent }) {
                 <div className="flex mt-2 -mx-3">
                     <div className="flex flex-col w-1/2 px-3">
                         <span className="text-xs text-slate-500 dark:text-slate-300 mb-1">
-                            Last Month
+                            Último Mes
                         </span>
                         <span className="text-sm font-bold text-slate-600 dark:text-white">
                             {data.lastMonth}
@@ -51,7 +51,7 @@ function InfoTiles({ title, data, accent }) {
                     </div>
                     <div className="flex flex-col w-1/2 px-3">
                         <span className="text-xs text-slate-500 dark:text-slate-300 mb-1">
-                            This Year
+                            Este Año
                         </span>
                         <span className="text-sm font-bold text-slate-600 dark:text-white">
                             {data.thisYear}

@@ -10,21 +10,21 @@ function RecentDocument() {
             <div className="flex flex-col isolate relative">
                 <div className="p-5 flex justify-between items-center gap-x-4">
                     <h6 className="text-md font-bold text-slate-700 dark:text-white">
-                        Recent Documents
+                        Documentos Recientes
                     </h6>
                     <Link
                         to="/documents"
                         className="font-medium text-sm text-blue-600 hover:text-blue-800"
                     >
-                        View All
+                        Ver Todos
                     </Link>
                 </div>
                 <div className="overflow-x-auto scrollbar-thin scrollbar-track-slate-200 dark:scrollbar-track-slate-800 scrollbar-thumb-slate-600">
                     <table className="table-auto w-full text-sm border-t border-slate-200 dark:border-slate-800 border-collapse">
                         <thead className="text-slate-600 dark:text-slate-200">
                             <tr>
-                                <th className="text-start px-5 py-2">Document</th>
-                                <th className="text-start px-5 py-2">Created</th>
+                                <th className="text-start px-5 py-2">Documento</th>
+                                <th className="text-start px-5 py-2">Creado</th>
                                 <th className="sticky end-0 bg-white dark:bg-slate-950"></th>
                             </tr>
                         </thead>
@@ -50,14 +50,14 @@ function RecentDocument() {
                                         colSpan={3}
                                     >
                                         <span className="block text-slate-500 dark:text-slate-400 mb-3">
-                                            There is no document to show
+                                            No hay documentos para mostrar
                                         </span>
                                         <Button
                                             as="Link"
                                             to="/templates"
                                             className="bg-blue-600 text-white hover:bg-blue-800"
                                         >
-                                            Create New
+                                            Crear Nuevo
                                         </Button>
                                     </td>
                                 </tr>
