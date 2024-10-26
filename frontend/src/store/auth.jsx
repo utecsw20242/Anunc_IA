@@ -1,5 +1,5 @@
 const data = {
-    name: "Phillip Burke",
+    name: "Carlos Balbuena",
     avatar: "/images/avatar/a.jpg",
 }
 

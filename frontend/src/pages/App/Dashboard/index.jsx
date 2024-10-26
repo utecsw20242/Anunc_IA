@@ -19,7 +19,7 @@ function Home() {
                     <div className="mb-7 flex justify-between items-center -mx-3">
                         <div className="px-3">
                             <h2 className="text-xl font-bold text-slate-700 dark:text-white mb-2">
-                                Overview
+                                Resumen
                             </h2>
                         </div>
                         <div className="px-3">

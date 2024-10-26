@@ -14,8 +14,17 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 if DATABASE_URL is None:
     raise ValueError("DATABASE_URL no está definida. Asegúrate de tener un archivo .env correctamente configurado.")
 
-# Crear el motor y la sesión de SQLAlchemy
-engine = create_engine(DATABASE_URL)
+# Configuración de la base de datos con parámetros adicionales para conexiones remotas
+engine = create_engine(
+    DATABASE_URL,
+    pool_size=10,              # Tamaño del pool de conexiones
+    max_overflow=20,           # Conexiones adicionales que se pueden abrir si el pool está lleno
+    pool_timeout=30,           # Tiempo de espera máximo para obtener una conexión
+    pool_recycle=1800,         # Tiempo de reciclaje de conexiones (en segundos)
+    pool_pre_ping=True         # Verifica la conexión antes de usarla
+)
+
+# Crear la sesión de SQLAlchemy
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 

@@ -30,9 +30,9 @@ function Router() {
             <ScrollToTop>
                 <Routes>
                     <Route element={<ThemeProvider />}>
-                            <Route index element={<WebsiteIntro />} />
-                                <Route path="login" element={<LoginPage />} />
-                                <Route path="create-account" element={<CreateAccountPage />} />
+                        <Route index element={<WebsiteIntro />} />
+                            <Route path="login" element={<LoginPage />} />
+                            <Route path="create-account" element={<CreateAccountPage />} />
                         
                         <Route path="dashboard">
                             <Route index element={<AppDashboard />} />

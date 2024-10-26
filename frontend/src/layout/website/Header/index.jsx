@@ -2,7 +2,6 @@ import React from "react";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 import Logo from "../../global/Logo";
-import Menu from "./Menu";
 import Container from "../../global/Container";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import {MoonIcon, SunIcon} from "@heroicons/react/24/solid";
@@ -35,9 +34,6 @@ function Header({mobile, visibility, setVisibility, className}) {
                             className="fixed inset-0 bg-slate-950 bg-opacity-50 z-[1019]"
                         ></div>
                     )}
-                    <div className={menuClass}>
-                        <Menu mobile={mobile} />
-                    </div>
                     <ul className="flex items-center gap-x-3 lg:gap-x-5">
                         <li className="inline-flex relative">
                             <button
