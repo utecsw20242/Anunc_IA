@@ -19,7 +19,11 @@ jobs:
         python-version: '3.x'
 
     - name: Set PYTHONPATH
-      run: echo "PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/backend" >> $GITHUB_ENV  # Incluye la raíz y 'backend' en el PYTHONPATH
+      run: echo "PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/backend" >> $GITHUB_ENV
+
+    # Configura DATABASE_URL como una variable de entorno usando el secreto de GitHub
+    - name: Set DATABASE_URL
+      run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
 
     - name: Install backend dependencies
       run: |
@@ -50,21 +54,21 @@ jobs:
 
   deploy_frontend:
     runs-on: ubuntu-latest
-  
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-  
+
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
         node-version: '18'  # Versión de Node.js compatible con tu proyecto
-  
+
     - name: Install frontend dependencies
       run: |
         cd frontend
         npm install
-  
+
     # Verificación de despliegue en modo desarrollo
     - name: Skip deployment in development mode
       run: |
@@ -79,7 +83,7 @@ jobs:
       run: |
         cd frontend
         npm run build
-  
+
     - name: Deploy to S3 (only if build exists)
       if: ${{ github.event_name != 'push' }}  # Solo despliega si NO estás en desarrollo
       run: |
