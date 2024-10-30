@@ -18,8 +18,8 @@ import {
 const data = [
     {
         id: "01",
-        icon: <Robot />,  // Puedes usar el ícono que prefieras o tengas disponible
-        link: "/app/templates/ai-strategy-suggestions",
+        icon: <Robot />,
+        link: "/template/ai-strategy-suggestions",
         slug: "ai-strategy-suggestions",
         name: "Sugerencias Estratégicas de IA",
         status: "active",
@@ -31,7 +31,7 @@ const data = [
     {
         id: "02",
         icon: <AIChatBot />,
-        link: "/app/templates/chatbot",
+        link: "/template/chatbot",
         slug: "ai-chatbot",
         name: "Asistente de IA",
         status: "active",
@@ -43,7 +43,7 @@ const data = [
     {
         id: "03",
         icon: <WriteTitle />,
-        link: "/app/templates/ad-title",
+        link: "/template/ad-title",
         slug: "ad-title",
         name: "Headline para Anuncio",
         status: "active",
@@ -55,7 +55,7 @@ const data = [
     {
         id: "04",
         icon: <WriteDescription />,
-        link: "/app/templates/ad-description",
+        link: "/template/ad-description",
         slug: "ad-description",
         name: "Descripción para Anuncio",
         status: "active",
@@ -67,7 +67,7 @@ const data = [
     {
         id: "05",
         icon: <AudienceIdentifier />,
-        link: "/app/templates/audience-identifier",
+        link: "/template/audience-identifier",
         slug: "audience-identifier",
         name: "Identificador de Público",
         status: "active",
@@ -79,7 +79,7 @@ const data = [
     {
         id: "06",
         icon: <BudgetRecommendation />,
-        link: "/app/templates/budget-recommendation",
+        link: "/template/budget-recommendation",
         slug: "budget-recommendation",
         name: "Recomendación de Presupuesto y Duración",
         status: "active",
@@ -91,7 +91,7 @@ const data = [
     {
         id: "07",
         icon: <AIPromptImage />,
-        link: "/app/templates/ai-image-prompt",
+        link: "/template/ai-image-prompt",
         slug: "ai-image-prompt",
         name: "Prompt para Imagen AI",
         status: "active",
@@ -103,7 +103,7 @@ const data = [
     {
         id: "08",
         icon: <AdPublisher />,
-        link: "/app/templates/ad-publisher",
+        link: "/template/ad-publisher",
         slug: "ad-publisher",
         name: "Publica Anuncios",
         status: "active",
@@ -115,7 +115,7 @@ const data = [
     {
         id: "09",
         icon: <FacebookAds />,
-        link: "/app/templates/facebook-ads",
+        link: "/template/facebook-ads",
         slug: "facebook-ads",
         name: "Facebook Ads",
         status: "active",
@@ -127,7 +127,7 @@ const data = [
     {
         id: "10",
         icon: <GoogleAds />,
-        link: "/app/templates/google-ads",
+        link: "/template/google-ads",
         slug: "google-ads",
         name: "Google Ads",
         status: "active",
@@ -139,7 +139,7 @@ const data = [
     {
         id: "11",
         icon: <TikTokAds />,
-        link: "/app/templates/tiktok-ads",
+        link: "/template/tiktok-ads",
         slug: "tiktok-ads",
         name: "TikTok Ads",
         status: "active",
@@ -151,7 +151,7 @@ const data = [
     {
         id: "12",
         icon: <CreatedDocuments />,
-        link: "/app/templates/documents",
+        link: "/template/documents",
         slug: "created-documents",
         name: "Documentos Creados",
         status: "active",
@@ -163,7 +163,7 @@ const data = [
     {
         id: "13",
         icon: <AdAccountLink />,
-        link: "/app/templates/ad-account-link",
+        link: "/template/ad-account-link",
         slug: "ad-account-link",
         name: "Vincular Cuenta Publicitaria",
         status: "active",
@@ -175,7 +175,7 @@ const data = [
     {
         id: "14",
         icon: <SettingsManager />,
-        link: "/app/templates/settings",
+        link: "/template/settings",
         slug: "settings",
         name: "Configuraciones",
         status: "active",

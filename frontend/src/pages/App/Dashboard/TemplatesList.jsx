@@ -12,12 +12,9 @@ function TemplatesList() {
                     </h2>
                 </div>
                 <div className="px-3">
-                    <Link
-                        to="#"
-                        className="font-medium text-sm text-blue-600 hover:text-blue-800"
-                    >
-                        Ver Todos
-                    </Link>
+                <Link to="/template" className="font-medium text-sm text-blue-600 hover:text-blue-800">
+                    Ver Todos
+                </Link>
                 </div>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">

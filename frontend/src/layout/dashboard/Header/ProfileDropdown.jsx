@@ -68,20 +68,20 @@ function ProfileDropdown() {
                     <ul className="py-2 border-t border-slate-200 dark:border-slate-800">
                         <li>
                             <NavLink
-                                to="/app"
+                                to="/"
                                 className="flex text-xs px-4 py-2 font-bold text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all"
                             >
                                 <CubeIcon className="w-4 me-2" />
-                                <span>Go to App</span>
+                                <span>Ir al inicio</span>
                             </NavLink>
                         </li>
                         <li>
                             <NavLink
-                                to="/admin/settings"
+                                to="/settings"
                                 className="flex text-xs px-4 py-2 font-bold text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all"
                             >
                                 <WrenchScrewdriverIcon className="w-4 me-2" />
-                                <span>Settings</span>
+                                <span>Configuración</span>
                             </NavLink>
                         </li>
                         <li>
@@ -90,7 +90,7 @@ function ProfileDropdown() {
                                 className="flex text-xs w-full px-4 py-2 font-bold text-slate-500 dark:text-slate-200 hover:text-blue-600 hover:dark:text-blue-600 transition-all"
                             >
                                 <PowerIcon className="w-4 me-2" />
-                                <span>Logout</span>
+                                <span>Cerrar Sesión</span>
                             </button>
                         </li>
                     </ul>
