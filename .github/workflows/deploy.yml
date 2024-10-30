@@ -25,6 +25,10 @@ jobs:
     - name: Set DATABASE_URL
       run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
 
+    # Configura SECRET_KEY como una variable de entorno usando el secreto de GitHub
+    - name: Set SECRET_KEY
+      run: echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
+
     - name: Install backend dependencies
       run: |
         pip install -r backend/requirements.txt
