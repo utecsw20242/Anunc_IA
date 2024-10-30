@@ -1,6 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
-from main import app  # Importa la app desde main.py en la raíz del proyecto
+from backend.main import app  # Importa la app desde main.py en la carpeta backend
 from sqlalchemy.orm import Session
 from common.database.database import get_db  # Ruta corregida a common/database/database.py
 from services.auth_service.models import Usuario  # Ruta corregida a services/auth_service/models.py
