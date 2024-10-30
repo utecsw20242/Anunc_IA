@@ -21,6 +21,13 @@ jobs:
     - name: Install backend dependencies
       run: |
         pip install -r backend/requirements.txt
+        pip install pytest coverage  # Instala pytest y coverage para las pruebas y cobertura de código
+
+    - name: Run tests with coverage
+      run: |
+        coverage run -m pytest tests  # Ejecuta pytest y calcula la cobertura
+        coverage report  # Muestra el reporte de cobertura en la consola
+        coverage xml -o coverage.xml  # Genera un archivo coverage.xml para integraciones externas
 
     - name: Zip backend code
       run: zip -r backend.zip backend/ main.py requirements.txt
@@ -48,14 +55,14 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18' # Versión de Node.js compatible con tu proyecto
+        node-version: '18'  # Versión de Node.js compatible con tu proyecto
   
     - name: Install frontend dependencies
       run: |
         cd frontend
         npm install
   
-    # Aquí verificamos si estamos en desarrollo y mostramos un mensaje en lugar de fallar
+    # Verificación de despliegue en modo desarrollo
     - name: Skip deployment in development mode
       run: |
         if [ "$CI" = "true" ]; then
