@@ -18,6 +18,9 @@ jobs:
       with:
         python-version: '3.x'
 
+    - name: Set PYTHONPATH
+      run: echo "PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/backend" >> $GITHUB_ENV  # Incluye la raíz y 'backend' en el PYTHONPATH
+
     - name: Install backend dependencies
       run: |
         pip install -r backend/requirements.txt
