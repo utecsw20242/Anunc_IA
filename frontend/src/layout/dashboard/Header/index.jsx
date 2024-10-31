@@ -25,7 +25,7 @@ function Header({sidebarVisibility, setSidebarVisibility}) {
                     >
                         <Bars3Icon className="h-5" />
                     </button>
-                    <Link to="/admin">
+                    <Link to="/dashboard">
                         <Logo />
                     </Link> 
                 </div>
