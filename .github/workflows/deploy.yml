@@ -3,7 +3,7 @@ name: Deploy AnuncIA to AWS
 on:
   push:
     branches:
-      - main  # Ejecutar el despliegue cada vez que haya un push a la rama main
+      - main 
 
 jobs:
   deploy_backend:
@@ -38,6 +38,9 @@ jobs:
         pip install -r backend/requirements.txt
         pip install pytest coverage  # Instala pytest y coverage para las pruebas y cobertura de código
 
+    - name: Clear coverage cache
+      run: rm -f .coverage 
+
     - name: Run tests with coverage
       run: |
         coverage run -m pytest tests  # Ejecuta pytest y calcula la cobertura
@@ -52,7 +55,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-2  # Cambia a tu región de AWS
+        aws-region: us-east-2 
 
     - name: Deploy to AWS Lambda
       run: |
@@ -70,7 +73,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18'  # Versión de Node.js compatible con tu proyecto
+        node-version: '18' 
 
     - name: Install frontend dependencies
       run: |
