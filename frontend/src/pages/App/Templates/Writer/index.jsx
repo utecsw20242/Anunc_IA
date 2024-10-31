@@ -7,8 +7,8 @@ import Container from "../../../../layout/global/Container";
 import { Input, Label, Select, Textarea } from "../../../../components";
 
 import { templates } from "../../../../store";
-import { language, result as resultdata } from "../../../../store";
 import { NavLink, useParams } from "react-router-dom";
+import axios from "axios";  // Asegúrate de tener axios instalado para las solicitudes HTTP
 
 const tonos = [
     { name: "Profesional" },
@@ -24,15 +24,33 @@ const tonos = [
 const plantillasDeTexto = templates.filter((template) => template.api === "Text");
 
 function Escritor() {
-
-    const [idiomaSeleccionado, setIdiomaSeleccionado] = useState(language[40]);
     const [tonoSeleccionado, setTonoSeleccionado] = useState(tonos[0]);
-
+    const [nombreProducto, setNombreProducto] = useState("");
+    const [descripcionProducto, setDescripcionProducto] = useState("");
+    const [palabrasClave, setPalabrasClave] = useState("");
+    const [longitudMaxima, setLongitudMaxima] = useState(200);
+    const [variantes, setVariantes] = useState(3);
+    const [resultado, setResultado] = useState('');
+    
     const { writerslug } = useParams();
-
     const plantilla = templates.filter((template) => template.slug === writerslug)[0];
 
-    const [resultado, setResultado] = useState('');
+    const generarEncabezado = async () => {
+        try {
+            const response = await axios.post("http://localhost:8000/content/create_heading", {
+                nombreProducto,
+                descripcionProducto,
+                palabrasClave,
+                estiloEscritura: tonoSeleccionado.name,
+                longitudMaxima,
+                variantes
+            });
+            setResultado(response.data.encabezados.join("<br><br>")); // Mostrar las variantes separadas por salto de línea
+        } catch (error) {
+            console.error("Error al generar el encabezado:", error);
+            setResultado("Ocurrió un error al generar el encabezado.");
+        }
+    };
 
     return (
         <Layout title={`${plantilla.name}`}>
@@ -73,77 +91,66 @@ function Escritor() {
                                     </div>
                                     <div className="flex flex-wrap -my-2 -mx-3">
                                         <div className="w-full py-2 px-3">
-                                            <Label htmlFor="title" className="mb-2">
-                                                Tema
-                                            </Label>
-                                            <Textarea
-                                                placeholder="Crea un campaña de verano para mi producto"
-                                                id="title"
-                                                rows="4"
+                                            <Label htmlFor="nombreProducto" className="mb-2">Nombre del Producto</Label>
+                                            <Input
+                                                placeholder="Introduce el nombre del producto"
+                                                id="nombreProducto"
+                                                value={nombreProducto}
+                                                onChange={(e) => setNombreProducto(e.target.value)}
                                             />
                                         </div>
                                         <div className="w-full py-2 px-3">
-                                            <Label
-                                                htmlFor="keywords"
-                                                className="mb-2"
-                                            >
-                                                Palabras clave
-                                                <span className="self-start text-xs text-slate-500 dark:text-slate-400 ms-2 mt-0.5">
-                                                    Separadas por comas
-                                                </span>
+                                            <Label htmlFor="descripcionProducto" className="mb-2">Descripción del Producto</Label>
+                                            <Textarea
+                                                placeholder="Describe el producto"
+                                                id="descripcionProducto"
+                                                rows="4"
+                                                value={descripcionProducto}
+                                                onChange={(e) => setDescripcionProducto(e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="w-full py-2 px-3">
+                                            <Label htmlFor="keywords" className="mb-2">
+                                                Palabras clave <span className="self-start text-xs text-slate-500 dark:text-slate-400 ms-2 mt-0.5">Separadas por comas</span>
                                             </Label>
                                             <Input
-                                                placeholder="Ecommerce, productividad, engagement"
+                                                placeholder="Ejemplo: Ecommerce, productividad, engagement"
                                                 id="keywords"
+                                                value={palabrasClave}
+                                                onChange={(e) => setPalabrasClave(e.target.value)}
                                             />
                                         </div>
                                         <div className="w-full sm:w-1/2 lg:w-full py-2 px-3">
-                                            <Label htmlFor="tone" className="mb-2">
-                                                Estilo de Escritura
-                                            </Label>
+                                            <Label htmlFor="tone" className="mb-2">Estilo de Escritura</Label>
                                             <Select
                                                 selected={tonoSeleccionado}
                                                 options={tonos}
-                                                onChange={(value) => {
-                                                    setTonoSeleccionado(value);
-                                                }}
+                                                onChange={(value) => setTonoSeleccionado(value)}
                                                 id="tone"
                                             />
                                         </div>
                                         <div className="w-full sm:w-1/2 lg:w-full py-2 px-3">
-                                            <Label
-                                                htmlFor="varient"
-                                                className="mb-2"
-                                            >
-                                                Variantes
-                                            </Label>
-                                            <div className="relative">
-                                                <Input
-                                                    id="varient"
-                                                    type="number"
-                                                    max="3"
-                                                    defaultValue="1"
-                                                />
-                                            </div>
+                                            <Label htmlFor="varientes" className="mb-2">Variantes</Label>
+                                            <Input
+                                                id="varientes"
+                                                type="number"
+                                                max="3"
+                                                value={variantes}
+                                                onChange={(e) => setVariantes(parseInt(e.target.value))}
+                                            />
                                         </div>
                                         <div className="w-full sm:w-1/2 lg:w-full py-2 px-3">
-                                            <Label
-                                                htmlFor="varient"
-                                                className="mb-2"
-                                            >
-                                                Longitud Máxima del Resultado
-                                            </Label>
-                                            <div className="relative">
-                                                <Input
-                                                    id="resultslength"
-                                                    type="number"
-                                                    max="200"
-                                                    defaultValue="200"
-                                                />
-                                            </div>
+                                            <Label htmlFor="maxLength" className="mb-2">Longitud Máxima del Resultado</Label>
+                                            <Input
+                                                id="maxLength"
+                                                type="number"
+                                                max="200"
+                                                value={longitudMaxima}
+                                                onChange={(e) => setLongitudMaxima(parseInt(e.target.value))}
+                                            />
                                         </div>
                                         <div className="py-2 px-3">
-                                            <button onClick={ () => setResultado(resultdata.text) } className="inline-flex font-medium text-sm bg-blue-600 text-white hover:bg-blue-800 transition-all px-5 py-2 rounded-full">
+                                            <button onClick={generarEncabezado} className="inline-flex font-medium text-sm bg-blue-600 text-white hover:bg-blue-800 transition-all px-5 py-2 rounded-full">
                                                 Generar
                                             </button>
                                         </div>

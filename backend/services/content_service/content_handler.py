@@ -20,6 +20,15 @@ class CopiaPublicitaria(BaseModel):
     descripcionProducto: str
     publicoObjetivo: str = None
 
+# Modelo Pydantic para encabezado de anuncio
+class EncabezadoAnuncio(BaseModel):
+    nombreProducto: str
+    descripcionProducto: str
+    palabrasClave: str
+    estiloEscritura: str
+    longitudMaxima: int
+    variantes: int = 3  # Número de variantes a generar
+
 # Endpoint para generar 5 variaciones de Copias Publicitarias y Audiencia
 # Ahora está protegido por JWT
 @router.post("/generar_copias_publicitarias_y_audiencia/")
@@ -70,6 +79,47 @@ Descripción: {copia.descripcionProducto}
         return {
             "copiasPublicitarias": variaciones,
             "user": current_user.nombre  # Devuelve detalles del usuario autenticado
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Endpoint para generar el encabezado del anuncio sin autenticación
+@router.post("/create_heading")
+async def create_heading(encabezado: EncabezadoAnuncio):
+    # Crear el prompt para la generación del encabezado de anuncio
+    prompt = f"""
+Eres un redactor publicitario experto en crear encabezados cautivadores para anuncios en plataformas de redes sociales. Tu tarea es generar encabezados concisos que cumplan con los siguientes requisitos:
+
+1. Producto: El encabezado debe estar optimizado para el producto nombrado y descrito.
+2. Palabras Clave: Usa las palabras clave proporcionadas para asegurar que el encabezado esté optimizado.
+3. Estilo de Escritura: Adapta el estilo de escritura especificado, que puede variar desde un tono profesional hasta uno casual y atractivo.
+4. Longitud Máxima: Limita el encabezado a un máximo de {encabezado.longitudMaxima} caracteres, manteniendo claridad y atracción.
+5. Variantes: Proporciona {encabezado.variantes} versiones únicas del encabezado, cada una manteniendo el tono y relevancia para el producto.
+
+Detalles del Producto:
+- Nombre: {encabezado.nombreProducto}
+- Descripción: {encabezado.descripcionProducto}
+
+Palabras Clave: {encabezado.palabrasClave}
+Estilo de Escritura: {encabezado.estiloEscritura}
+Longitud Máxima de Caracteres: {encabezado.longitudMaxima}
+"""
+
+    try:
+        # Generar encabezados publicitarios
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=100,
+            temperature=0.7,
+        )
+        encabezados_generados = response.choices[0].message.content.strip()
+
+        # Separar las variantes generadas por saltos de línea dobles
+        variantes = encabezados_generados.split("\n\n")
+
+        return {
+            "encabezados": variantes[:encabezado.variantes]  # Limitar a las variantes especificadas
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
