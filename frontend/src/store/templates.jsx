@@ -26,8 +26,16 @@ const data = [
         prompt: "Genera estrategias de IA para campañas",
         api: "Strategy",
         aimodel: "davinci",
-        description: "Ofrece recomendaciones de IA para optimizar las estrategias publicitarias, mejorando el targeting y los mensajes."
-    },    
+        description: "Ofrece recomendaciones de IA para optimizar las estrategias publicitarias, mejorando el targeting y los mensajes.",
+        customFields: [
+            {
+                label: "Tipo de Estrategia",
+                type: "select",
+                id: "tipoEstrategia",
+                options: ["SEO", "PPC", "Contenido", "Social Media"],
+            },
+        ],
+    },   
     {
         id: "02",
         icon: <AIChatBot />,
@@ -50,7 +58,21 @@ const data = [
         prompt: "Genera títulos para anuncios",
         api: "Text",
         aimodel: "davinci",
-        description: "Genera títulos atractivos y efectivos para tus anuncios en diferentes plataformas."
+        description: "Genera títulos atractivos y efectivos para tus anuncios en diferentes plataformas.",
+        customFields: [
+            {
+                label: "Plataforma de Publicidad",
+                type: "text",
+                id: "plataformaPublicidad",
+                placeholder: "Ej. Facebook, Google",
+            },
+            {
+                label: "Estilo del Título",
+                type: "select",
+                id: "estiloTitulo",
+                options: ["Formal", "Informal", "Humorístico"],
+            },
+        ],
     },
     {
         id: "04",

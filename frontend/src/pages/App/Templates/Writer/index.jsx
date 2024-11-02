@@ -23,7 +23,7 @@ const tonos = [
 
 const plantillasDeTexto = templates.filter((template) => template.api === "Text");
 
-function Escritor() {
+function Writer() {
     const [tonoSeleccionado, setTonoSeleccionado] = useState(tonos[0]);
     const [nombreProducto, setNombreProducto] = useState("");
     const [descripcionProducto, setDescripcionProducto] = useState("");
@@ -91,7 +91,8 @@ function Escritor() {
                                     </div>
                                     <div className="flex flex-wrap -my-2 -mx-3">
                                         <div className="w-full py-2 px-3">
-                                            <Label htmlFor="nombreProducto" className="mb-2">Nombre del Producto</Label>
+                                            <Label htmlFor="nombreProducto" className="mb-2">
+                                                Nombre del Producto</Label>
                                             <Input
                                                 placeholder="Introduce el nombre del producto"
                                                 id="nombreProducto"
@@ -179,4 +180,4 @@ function Escritor() {
     );
 }
 
-export default Escritor;
+export default Writer;

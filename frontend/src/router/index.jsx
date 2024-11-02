@@ -34,7 +34,7 @@ function Router() {
                         <Route path="create-account" element={<CreateAccountPage />} />
                         <Route path="template">
                             <Route index element={<TemplatesPage />} />
-                            <Route path=":writerslug" element={<TemplatesWriterPage />} /> {/* :writerslug para manejar rutas dinámicas */}
+                            <Route path=":writerslug" element={<TemplatesWriterPage />} />
                         </Route>
                         {/* Ruta protegida del dashboard */}
                         <Route

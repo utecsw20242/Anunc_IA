@@ -8,7 +8,7 @@ import { Breadcrumbs } from "../../../components";
 
 function TemplatesPage() {
     return (
-        <Layout title="Templates">
+        <Layout title="Plantillas">
             <Section className="py-10 px-3">
                 <Container>
                     <div className="mb-7 flex flex-col items-center">
