@@ -3,6 +3,7 @@ from pydantic import BaseModel
 import os
 from openai import OpenAI
 from dotenv import load_dotenv
+from .models import CampanaDetallesInput, PublicoObjetivoUbicacionesInput, FormatoCTAInput, ContenidoCreativoInput, EncabezadoAnuncio
 
 # Cargar las variables de entorno desde el archivo .env en la carpeta config
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '../../.env'))
@@ -13,118 +14,52 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 # Crear el router de FastAPI
 router = APIRouter()
 
-# Modelos Pydantic para cada endpoint
-
-class ObjetivoCampanaInput(BaseModel):
-    nombreProducto: str
-    descripcionProducto: str
-
-class PresupuestoDuracionInput(BaseModel):
-    nombreProducto: str
-    tipoCampana: str  # Pequeña, Mediana, Grande
-    duracion: str  # Corta, Mediana, Larga
-
-class PublicoObjetivoUbicacionesInput(BaseModel):
-    nombreProducto: str
-    descripcionProducto: str
-    distrito: str
-    provincia: str
-    departamento: str
-    ubicacionesMeta: str  # Lista de ubicaciones de anuncios predefinidas de Meta
-
-class FormatoCTAInput(BaseModel):
-    nombreProducto: str
-    descripcionProducto: str
-
-class ContenidoCreativoInput(BaseModel):
-    nombreProducto: str
-    descripcionProducto: str
-    publicoObjetivo: str
-    tonoEstilo: str  # Por ejemplo, 'casual y juvenil', 'profesional y serio'
-
-class EncabezadoAnuncio(BaseModel):
-    nombreProducto: str
-    descripcionProducto: str
-    palabrasClave: str
-    estiloEscritura: str
-    longitudMaxima: int
-    variantes: int = 3  # Número de variantes a generar
-
-# Endpoint 1: Definir el objetivo de la campaña + Asignar un nombre a la campaña
-@router.post("/definir_objetivo_campana")
-async def definir_objetivo_campana(data: ObjetivoCampanaInput):
+# Endpoint 1: Definir el objetivo de la campaña y detalles como presupuesto y duración
+@router.post("/definir_campana")
+async def definir_campana(data: CampanaDetallesInput):
     prompt = f"""
-Como experto en marketing digital y campañas de Meta Ads, selecciona el objetivo de campaña más adecuado para "{data.nombreProducto}" de entre los objetivos predefinidos por Meta (por ejemplo, 'Reconocimiento de marca', 'Tráfico', 'Interacciones', 'Conversiones', etc.).
+Como experto en marketing digital y campañas de Meta Ads, tu tarea es:
 
-Ten en cuenta:
+1. **Seleccionar el objetivo de campaña más adecuado** para "{data.nombreProducto}" de entre los objetivos predefinidos por Meta (por ejemplo, 'Reconocimiento de marca', 'Tráfico', 'Interacciones', 'Conversiones', etc.).
 
-- **Beneficios únicos** y **características diferenciadoras** de "{data.nombreProducto}".
-- **Necesidades y deseos** del público objetivo.
-- **Objetivos comerciales** de la empresa.
+    Considera:
+    - **Beneficios únicos** y **características diferenciadoras** de "{data.nombreProducto}".
+    - **Necesidades y deseos** del público objetivo.
+    - **Objetivos comerciales** de la empresa.
 
-Asegúrate de que el objetivo seleccionado maximice el impacto de la campaña y esté alineado con la estrategia general de marketing.
+2. **Recomendar un presupuesto total** que maximice el retorno de inversión (ROI) para la campaña, basado en:
+    - **Tipo de campaña**: {data.tipoCampana}.
+    - **Duración preferida**: {data.duracionPreferida}.
 
-Además, crea un **nombre de campaña atractivo y memorable** que:
+3. **Determinar la duración óptima** de la campaña en días, semanas o meses, considerando:
+    - **Objetivos de marketing** y **expectativas de rendimiento**.
+    - **Sector del producto**, **comportamiento del consumidor** y **prácticas actuales del mercado**.
 
-- Refleje el propósito principal de la campaña.
-- Resalte la propuesta de valor de "{data.nombreProducto}".
-- Capte la atención del público objetivo y genere interés inmediato.
-
-Proporciona tu respuesta en un formato claro y estructurado, explicando brevemente las razones detrás de la selección del objetivo y del nombre de la campaña.
+Proporciona tu respuesta en un formato claro y estructurado, explicando brevemente las razones detrás de cada recomendación.
 
 **Detalles del Producto:**
 - Nombre: {data.nombreProducto}
 - Descripción: {data.descripcionProducto}
 """
+
     try:
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=500,
+            max_tokens=700,
             temperature=0.7,
         )
         resultado = response.choices[0].message.content.strip()
+        
+        # Suponiendo que la respuesta de GPT está estructurada con secciones claras
+        # Puedes parsear el resultado según el formato que devuelva GPT
+        # Aquí simplemente devolvemos el texto completo
         return {
-            "detalles_completos": resultado
+            "detalles_campana": resultado
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
-# Endpoint 2: Establecer el presupuesto + Determinar la duración de la campaña
-@router.post("/establecer_presupuesto_duracion")
-async def establecer_presupuesto_duracion(data: PresupuestoDuracionInput):
-    prompt = f"""
-Como especialista en planificación de campañas publicitarias, tu tarea es recomendar un **presupuesto total** y una **duración específica** para la campaña de "{data.nombreProducto}".
-
-Considera:
-
-- **Tipo de campaña**: {data.tipoCampana} (Pequeña, Mediana, Grande).
-- **Duración preferida**: {data.duracion} (Corta, Mediana, Larga).
-- **Objetivos de marketing** y **expectativas de rendimiento**.
-
-Basándote en estos parámetros:
-
-- Calcula un **presupuesto apropiado** que maximice el retorno de inversión (ROI).
-- Establece la **duración óptima** en días, semanas o meses.
-- Justifica tus recomendaciones considerando el sector del producto, el comportamiento del consumidor y las prácticas actuales del mercado.
-
-Proporciona una respuesta detallada y estructurada que apoye tus decisiones.
-
-**Detalles del Producto:**
-- Nombre: {data.nombreProducto}
-"""
-    try:
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=500,
-            temperature=0.7,
-        )
-        resultado = response.choices[0].message.content.strip()
-        return {"presupuesto_y_duracion": resultado}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
+    
 # Endpoint 3: Definir el público objetivo + Seleccionar las ubicaciones de los anuncios
 @router.post("/definir_publico_ubicaciones")
 async def definir_publico_ubicaciones(data: PublicoObjetivoUbicacionesInput):
