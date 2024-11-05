@@ -1,4 +1,6 @@
 from locust import HttpUser, task, between
+import random
+import string
 
 class FastAPIUser(HttpUser):
     wait_time = between(25, 30)  # Aumentar tiempo de espera para mantener usuarios activos
@@ -50,3 +52,20 @@ class FastAPIUser(HttpUser):
             "longitudMaxima": 60,
             "variantes": 3
         })
+
+    @task(1)
+    def register_user(self):
+        # Generar datos aleatorios
+        random_name = ''.join(random.choices(string.ascii_letters, k=8))
+        random_email = f"{random_name.lower()}@example.com"
+        random_password = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+
+        # Hacer la solicitud POST para el registro de usuario
+        self.client.post("/auth/register", json={
+            "nombre": random_name,
+            "email": random_email,
+            "password": random_password
+        })
+
+        
+
