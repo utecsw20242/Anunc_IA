@@ -58,7 +58,7 @@ Utiliza la información del producto a continuación para hacer tus recomendacio
         response = client.chat.completions.create(
             model="gpt-3.5-turbo-0125",
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=200,
+            max_tokens=300,
             temperature=0.7,
         )
         resultado = response.choices[0].message.content.strip()
@@ -142,7 +142,7 @@ Instagram Stories
         response = client.chat.completions.create(
             model="gpt-3.5-turbo-0125",
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=700,
+            max_tokens=300,
             temperature=0.7,
         )
         resultado = response.choices[0].message.content.strip()
@@ -215,7 +215,7 @@ Entre otros
         response = client.chat.completions.create(
             model="gpt-3.5-turbo-0125",  # Puedes usar el modelo que prefieras
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=500,
+            max_tokens=300,
             temperature=0.7,
         )
         resultado = response.choices[0].message.content.strip()
@@ -284,7 +284,7 @@ async def crear_contenido_creativo(data: ContenidoCreativoInput):
         response = client.chat.completions.create(
             model="gpt-3.5-turbo-0125",  # Puedes usar el modelo que prefieras
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=1000,
+            max_tokens=300,
             temperature=0.7,
         )
         resultado = response.choices[0].message.content.strip()
@@ -354,7 +354,7 @@ async def create_heading(encabezado: EncabezadoAnuncio):
         response = client.chat.completions.create(
             model="gpt-3.5-turbo-0125",  # Puedes usar el modelo que prefieras
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=500,
+            max_tokens=300,
             temperature=0.7,
         )
         resultado = response.choices[0].message.content.strip()
