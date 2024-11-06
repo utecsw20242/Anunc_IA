@@ -1,5 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends
-from pydantic import BaseModel
+from fastapi import APIRouter, HTTPException
 import os
 import re
 import json
@@ -12,7 +11,6 @@ from .models import (
     ContenidoCreativoInput,
     EncabezadoAnuncio,
 )
-import asyncio
 
 # Cargar las variables de entorno desde el archivo .env en la carpeta config
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '../../.env'))
