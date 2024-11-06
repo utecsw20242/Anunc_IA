@@ -13,7 +13,8 @@ from datetime import datetime, timedelta
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
 # Para el manejo de contraseñas seguras
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["bcrypt"], bcrypt__rounds=8)
+
 
 # Configuración para tokens JWT
 SECRET_KEY = os.getenv("SECRET_KEY")
