@@ -38,7 +38,7 @@ jobs:
 
     - name: Run tests with coverage
       run: |
-        coverage run -m pytest tests
+        coverage run --rcfile=.coveragerc -m pytest tests
         coverage report
         coverage xml -o coverage.xml
       continue-on-error: false
