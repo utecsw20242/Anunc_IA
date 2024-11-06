@@ -2,7 +2,7 @@
 
 import pytest
 import os
-from httpx import AsyncClient
+from httpx import AsyncClient, ASGITransport
 from unittest.mock import patch, AsyncMock
 from backend.main import app
 
@@ -19,6 +19,8 @@ def mock_generar_respuesta_openai():
     with patch('backend.services.content_service.content_handler.generar_respuesta_openai', new_callable=AsyncMock) as mock_func:
         yield mock_func
 
+transport = ASGITransport(app=app)
+
 @pytest.mark.anyio
 async def test_definir_campana(mock_generar_respuesta_openai):
     mock_generar_respuesta_openai.return_value = '{"detalles_campana": {"objetivo_campana": {"objetivo": "Incrementar ventas", "explicacion": "Es el objetivo principal..."}}}'
@@ -29,8 +31,8 @@ async def test_definir_campana(mock_generar_respuesta_openai):
         "tipoCampana": "Tipo de campaña de prueba",
         "duracionPreferida": "1 mes"
     }
-    async with AsyncClient(app=app, base_url="http://test") as ac:
-        response = await ac.post("/definir_campana", json=data)
+    async with AsyncClient(transport=transport, base_url="http://test") as ac:
+        response = await ac.post("/content/definir_campana", json=data)
     assert response.status_code == 200
     json_response = response.json()
     assert "detalles_campana" in json_response
@@ -46,8 +48,8 @@ async def test_definir_publico_ubicaciones(mock_generar_respuesta_openai):
         "provincia": "Lima",
         "departamento": "Lima"
     }
-    async with AsyncClient(app=app, base_url="http://test") as ac:
-        response = await ac.post("/definir_publico_ubicaciones", json=data)
+    async with AsyncClient(transport=transport, base_url="http://test") as ac:
+        response = await ac.post("/content/definir_publico_ubicaciones", json=data)
     assert response.status_code == 200
     json_response = response.json()
     assert "publico_objetivo" in json_response
@@ -60,8 +62,8 @@ async def test_elegir_formato_cta(mock_generar_respuesta_openai):
         "nombreProducto": "Producto de prueba",
         "descripcionProducto": "Descripción breve"
     }
-    async with AsyncClient(app=app, base_url="http://test") as ac:
-        response = await ac.post("/elegir_formato_cta", json=data)
+    async with AsyncClient(transport=transport, base_url="http://test") as ac:
+        response = await ac.post("/content/elegir_formato_cta", json=data)
     assert response.status_code == 200
     json_response = response.json()
     assert "formato_anuncio" in json_response
@@ -76,8 +78,8 @@ async def test_crear_contenido_creativo(mock_generar_respuesta_openai):
         "tonoEstilo": "Moderno y atractivo",
         "publicoObjetivo": "Jóvenes interesados en tecnología"
     }
-    async with AsyncClient(app=app, base_url="http://test") as ac:
-        response = await ac.post("/crear_contenido_creativo", json=data)
+    async with AsyncClient(transport=transport, base_url="http://test") as ac:
+        response = await ac.post("/content/crear_contenido_creativo", json=data)
     assert response.status_code == 200
     json_response = response.json()
     assert "variaciones" in json_response
@@ -94,8 +96,8 @@ async def test_create_heading(mock_generar_respuesta_openai):
         "longitudMaxima": 60,
         "variantes": 3
     }
-    async with AsyncClient(app=app, base_url="http://test") as ac:
-        response = await ac.post("/create_heading", json=data)
+    async with AsyncClient(transport=transport, base_url="http://test") as ac:
+        response = await ac.post("/content/create_heading", json=data)
     assert response.status_code == 200
     json_response = response.json()
     assert "encabezados" in json_response

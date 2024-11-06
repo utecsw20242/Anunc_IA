@@ -41,7 +41,6 @@ jobs:
         coverage run -m pytest tests
         coverage report
         coverage xml -o coverage.xml
-      # Asegúrate de que esta tarea falle si las pruebas fallan
       continue-on-error: false
 
     - name: Zip backend code
