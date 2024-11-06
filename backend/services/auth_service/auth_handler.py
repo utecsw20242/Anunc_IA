@@ -22,7 +22,6 @@ class LoginRequest(BaseModel):
     password: str
 
 @router.post("/register")
-@router.post("/auth/register")
 async def register_user(request: RegisterRequest, db: Session = Depends(get_db)):
     # Inicia el tiempo de la solicitud
     start_date = datetime.utcnow()
