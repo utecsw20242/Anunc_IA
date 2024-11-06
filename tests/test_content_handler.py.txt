@@ -1,14 +1,18 @@
 # tests/test_content_handler.py
 
-import pytest
 import os
+
+# Configurar variables de entorno antes de importar la aplicación
+os.environ['OPENAI_API_KEY'] = 'test_key'
+os.environ['SECRET_KEY'] = 'test_secret'
+
+import pytest
 from httpx import AsyncClient, ASGITransport
 from unittest.mock import patch, AsyncMock
 from backend.main import app
 
-# Configurar variables de entorno necesarias
-os.environ['OPENAI_API_KEY'] = 'test_key'
-os.environ['SECRET_KEY'] = 'test_secret'
+# Configurar transporte para AsyncClient
+transport = ASGITransport(app=app)
 
 @pytest.fixture
 def anyio_backend():
@@ -17,9 +21,11 @@ def anyio_backend():
 @pytest.fixture
 def mock_generar_respuesta_openai():
     with patch('backend.services.content_service.content_handler.generar_respuesta_openai', new_callable=AsyncMock) as mock_func:
+        # Configurar el mock para que retorne una corrutina que devuelve el valor deseado
+        async def async_return_value(*args, **kwargs):
+            return mock_func.return_value
+        mock_func.side_effect = async_return_value
         yield mock_func
-
-transport = ASGITransport(app=app)
 
 @pytest.mark.anyio
 async def test_definir_campana(mock_generar_respuesta_openai):
@@ -33,6 +39,8 @@ async def test_definir_campana(mock_generar_respuesta_openai):
     }
     async with AsyncClient(transport=transport, base_url="http://test") as ac:
         response = await ac.post("/content/definir_campana", json=data)
+    print(response.status_code)
+    print(response.text)
     assert response.status_code == 200
     json_response = response.json()
     assert "detalles_campana" in json_response
@@ -50,6 +58,8 @@ async def test_definir_publico_ubicaciones(mock_generar_respuesta_openai):
     }
     async with AsyncClient(transport=transport, base_url="http://test") as ac:
         response = await ac.post("/content/definir_publico_ubicaciones", json=data)
+    print(response.status_code)
+    print(response.text)
     assert response.status_code == 200
     json_response = response.json()
     assert "publico_objetivo" in json_response
@@ -64,6 +74,8 @@ async def test_elegir_formato_cta(mock_generar_respuesta_openai):
     }
     async with AsyncClient(transport=transport, base_url="http://test") as ac:
         response = await ac.post("/content/elegir_formato_cta", json=data)
+    print(response.status_code)
+    print(response.text)
     assert response.status_code == 200
     json_response = response.json()
     assert "formato_anuncio" in json_response
@@ -80,6 +92,8 @@ async def test_crear_contenido_creativo(mock_generar_respuesta_openai):
     }
     async with AsyncClient(transport=transport, base_url="http://test") as ac:
         response = await ac.post("/content/crear_contenido_creativo", json=data)
+    print(response.status_code)
+    print(response.text)
     assert response.status_code == 200
     json_response = response.json()
     assert "variaciones" in json_response
@@ -98,6 +112,8 @@ async def test_create_heading(mock_generar_respuesta_openai):
     }
     async with AsyncClient(transport=transport, base_url="http://test") as ac:
         response = await ac.post("/content/create_heading", json=data)
+    print(response.status_code)
+    print(response.text)
     assert response.status_code == 200
     json_response = response.json()
     assert "encabezados" in json_response

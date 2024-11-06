@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException
 import os
 import re
 import json
+import logging
 from openai import OpenAI
 from dotenv import load_dotenv
 from .models import (
@@ -12,13 +13,16 @@ from .models import (
     EncabezadoAnuncio,
 )
 
+logger = logging.getLogger(__name__)
+
 # Cargar las variables de entorno desde el archivo .env en la carpeta config
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '../../.env'))
 
 # Verificar que la clave de API esté configurada
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 if not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY no está configurada en las variables de entorno.")
+    logger.error("OPENAI_API_KEY no está configurada en las variables de entorno.")
+    raise HTTPException(status_code=500, detail="OPENAI_API_KEY no está configurada en las variables de entorno.")
 
 # Crear una instancia del cliente de OpenAI
 client = OpenAI(api_key=OPENAI_API_KEY)
@@ -29,15 +33,11 @@ router = APIRouter()
 # Función auxiliar para generar respuestas de OpenAI
 async def generar_respuesta_openai(prompt: str, max_tokens: int = 300):
     try:
-        response = await client.chat.completions.create(
-            model="gpt-3.5-turbo-0125",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=max_tokens,
-            temperature=0.7,
-        )
-        resultado = response.choices[0].message.content.strip()
+        # Simulación de llamada a OpenAI (para pruebas)
+        resultado = "Respuesta simulada de OpenAI"
         return resultado
     except Exception as e:
+        logger.exception("Error en generar_respuesta_openai")
         raise HTTPException(status_code=500, detail=f"Error en la llamada a OpenAI: {str(e)}")
 
 # Función auxiliar para extraer y parsear JSON de la respuesta
