@@ -10,7 +10,7 @@ from mangum import Mangum  # Importar Mangum para Lambda
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '.env'))
 
 # Crear la instancia de FastAPI
-app = FastAPI()
+app = FastAPI(debug=True)
 
 # Configuración de CORS
 app.add_middleware(
