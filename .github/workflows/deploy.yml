@@ -21,37 +21,27 @@ jobs:
     - name: Set PYTHONPATH
       run: echo "PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/backend" >> $GITHUB_ENV
 
-    - name: Set DATABASE_URL
-      run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
-
-    - name: Set SECRET_KEY
-      run: echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
-
-    - name: Set OPENAI_API_KEY
-      run: echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> $GITHUB_ENV
+    # Configura variables de entorno usando los secretos de GitHub
+    - name: Set environment variables
+      run: |
+        echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
+        echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
+        echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> $GITHUB_ENV
 
     - name: Install backend dependencies
       run: |
         pip install -r backend/requirements.txt
-        pip install pytest coverage
-
-    - name: Verify DATABASE_URL
-      run: |
-        if [ -z "$DATABASE_URL" ]; then
-          echo "DATABASE_URL is not set."
-          exit 1
-        else
-          echo "DATABASE_URL is set."
-        fi
+        pip install pytest coverage pytest-asyncio anyio httpx
 
     - name: Clear coverage cache
       run: rm -f .coverage 
 
     - name: Run tests with coverage
       run: |
-        coverage run -m pytest tests
+        coverage run --rcfile=.coveragerc -m pytest tests
         coverage report
         coverage xml -o coverage.xml
+      continue-on-error: false
 
     - name: Zip backend code
       run: zip -r backend.zip backend/ main.py requirements.txt
@@ -86,9 +76,10 @@ jobs:
         cd frontend
         npm install
 
+    # Skip deployment in development mode
     - name: Skip deployment in development mode
       if: ${{ github.event_name == 'push' }}
-      run: echo "Skipping build and deployment. Frontend is still in development mode."
+      run: echo "Development build, skipping deployment."
 
     - name: Build frontend (only for production)
       if: ${{ github.event_name != 'push' }}
