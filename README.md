@@ -20,7 +20,7 @@ Instrucciones de Despliegue Local
 
 Primero, clona este repositorio en tu máquina local:
 
-    git clone https://github.com/christophernajarro/Anunc_IA.git
+    git clone https://github.com/utecsw20242/Anunc_IA
     cd Anunc_IA
 
 2. Configurar las variables de entorno
